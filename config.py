@@ -9,3 +9,4 @@ class Config:
     DEBUG = os.getenv("DEBUG")
     SECRET_KEY = os.getenv("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = os.getenv("DB_ADDRESS")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

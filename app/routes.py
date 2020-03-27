@@ -5,6 +5,7 @@ from flask import current_app as app
 from .models import *
 from urllib import request as rq
 import json
+from .api_call import api_call
 
 
 # url_for will construct a hypertext link, similar to a_href
@@ -31,6 +32,27 @@ def create_user():
         db.session.add(new_user)
         db.session.commit()
         return make_response(f"User {name} Successfully Created!")
+
+@app.route('/display_users', methods = ['GET'])
+def display_users():
+    """ Display all the users"""
+
+    #db queries need to reference the class name User, not the table name
+    # look at all the users
+    users = User.query.all()
+    return render_template("our_users.html", users=users)
+
+
+@app.route('/apicall', methods = ['GET', 'POST'])
+def apicall():
+    """ Query the alphavantage API """
+    tickers = ['TSLA','UPRO']
+    data = list()
+    data.append(api_call(tickers[0]))
+    data.append(api_call(tickers[1]))
+
+    return render_template('api_test.html', data=data, tickers=tickers)
+
 
 
 @app.route('/savedata', methods = ['GET', 'POST'])

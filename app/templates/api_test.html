@@ -1,0 +1,27 @@
+<!--Api results-->
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Alphavantage Results</title>
+    
+    </head>
+    <body>
+        {% if data %}
+            {% for item in data %}
+                {% for timestamp, row in item.items() %}
+                <!--This ticker is iterating every other, not correct-->
+                {% for ticker in tickers %}
+                <h4>${{ ticker }}$ {{ timestamp  }}</h4>
+                <ul>
+                {% for key, value in row.items() %}
+                <li><p><strong>{{ key }}</strong>: {{ value }}</p></li>
+            
+            {% endfor %}
+        </ul>
+        <br>
+            {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        {% endif %}
+    </body>
+</html>

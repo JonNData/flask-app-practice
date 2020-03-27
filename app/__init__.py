@@ -25,7 +25,7 @@ def create_app():
         # import our routes
         from . import routes
 
-        # create the database 
+        # create the database and tables
         db.create_all()
 
         return app
